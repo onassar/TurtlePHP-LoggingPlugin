@@ -22,6 +22,9 @@ Feel free to make use of the TurtlePHP
 robust error logging flow.
 
 ### Example Initialization and Startup
+``` php
+<?php
+
     /**
      * Logging
      */
@@ -29,3 +32,4 @@ robust error logging flow.
     \Plugin\Logging::init();
     \Plugin\Logging::start();
 
+```
