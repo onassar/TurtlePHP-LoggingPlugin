@@ -9,7 +9,7 @@ it allows for the following customization:
  - error log path (defaults to <.>)
  - error reporting sensitivity (defaults to <E_ALL | E_STRICT>)
  - error log filesize limitation (defaults to 0)
- - whether or not errors should be logged (defaults to <true>)
+ - whether or not errors should be logged (defaults to \<true>)
  - whether or not errors should be displayed (defaults to <false>)
 
 The above options can be set through their respective methods (eg. <setPath>,
