@@ -1,8 +1,8 @@
 TurtlePHP Logging Plugin
 ===
 
-[TurtlePHP](https://github.com/onassar/TurtlePHP) Logging Plugin which allows for the modification of PHP's
-default error logging.  
+[TurtlePHP](https://github.com/onassar/TurtlePHP) Logging Plugin which allows
+for the modification of PHP&nbsp;s default error logging.  
 This plugin does not modify how to issue an error log directive; rather
 it allows for the following customization:
 
