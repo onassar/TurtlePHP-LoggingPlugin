@@ -25,7 +25,7 @@
         /**
          * _display
          * 
-         * @var    string (default: false)
+         * @var    boolean (default: false)
          * @access protected
          * @static
          */
@@ -145,7 +145,7 @@
          * 
          * @access public
          * @static
-         * @param  boolean $length
+         * @param  integer $length
          * @return void
          */
         public static function setLength($length)
@@ -160,7 +160,7 @@
          * 
          * @access public
          * @static
-         * @param  boolean $level
+         * @param  integer $level
          * @return void
          */
         public static function setLevel($level)
@@ -175,7 +175,7 @@
          * 
          * @access public
          * @static
-         * @param  String $path
+         * @param  string $path
          * @return void
          */
         public static function setPath($path)
