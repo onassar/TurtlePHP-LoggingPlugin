@@ -25,8 +25,8 @@
         /**
          * _display
          * 
-         * @var    boolean (default: false)
-         * @access protected
+         * @var     boolean (default: false)
+         * @access  protected
          * @static
          */
         protected static $_display = false;
@@ -34,8 +34,8 @@
         /**
          * _length
          * 
-         * @var    integer (default: 0)
-         * @access protected
+         * @var     integer (default: 0)
+         * @access  protected
          * @static
          */
         protected static $_length = 0;
@@ -43,8 +43,8 @@
         /**
          * _level
          * 
-         * @var    integer
-         * @access protected
+         * @var     integer
+         * @access  protected
          * @static
          */
         protected static $_level;
@@ -52,8 +52,8 @@
         /**
          * _log
          * 
-         * @var    boolean (default: true)
-         * @access protected
+         * @var     boolean (default: true)
+         * @access  protected
          * @static
          */
         protected static $_log = true;
@@ -61,8 +61,8 @@
         /**
          * _path
          * 
-         * @var    string
-         * @access protected
+         * @var     string
+         * @access  protected
          * @static
          */
         protected static $_path;
@@ -72,9 +72,9 @@
          * 
          * Toggles on the display of errors to the client.
          * 
-         * @access public
+         * @access  public
          * @static
-         * @return void
+         * @return  void
          */
         public static function displayErrors()
         {
@@ -86,9 +86,9 @@
          * 
          * Toggles off the display of errors to the client.
          * 
-         * @access public
+         * @access  public
          * @static
-         * @return void
+         * @return  void
          */
         public static function hideErrors()
         {
@@ -100,9 +100,9 @@
          * 
          * Initializes some error logging settings for ini setting.
          * 
-         * @access public
+         * @access  public
          * @static
-         * @return void
+         * @return  void
          */
         public static function init()
         {
@@ -115,9 +115,9 @@
          * 
          * Toggles on error logging (both to a file and to the client).
          * 
-         * @access public
+         * @access  public
          * @static
-         * @return void
+         * @return  void
          */
         public static function setActive()
         {
@@ -129,9 +129,9 @@
          * 
          * Toggles off error logging (both to a file and to the client).
          * 
-         * @access public
+         * @access  public
          * @static
-         * @return void
+         * @return  void
          */
         public static function setInactive()
         {
@@ -143,10 +143,10 @@
          * 
          * Sets the number of bytes that should be collected in an error log.
          * 
-         * @access public
+         * @access  public
          * @static
-         * @param  integer $length
-         * @return void
+         * @param   integer $length
+         * @return  void
          */
         public static function setLength($length)
         {
@@ -158,10 +158,10 @@
          * 
          * Sets the level for logging (eg. which types of errors are logged).
          * 
-         * @access public
+         * @access  public
          * @static
-         * @param  integer $level
-         * @return void
+         * @param   integer $level
+         * @return  void
          */
         public static function setLevel($level)
         {
@@ -173,10 +173,10 @@
          * 
          * Sets the path for error log writing.
          * 
-         * @access public
+         * @access  public
          * @static
-         * @param  string $path
-         * @return void
+         * @param   string $path
+         * @return  void
          */
         public static function setPath($path)
         {
@@ -189,9 +189,9 @@
          * Ensures that the log path is writable, and sets the ini settings
          * accordingly.
          * 
-         * @access public
+         * @access  public
          * @static
-         * @return void
+         * @return  void
          */
         public static function start()
         {
