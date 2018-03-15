@@ -17,7 +17,7 @@
      *  - whether or not errors should be logged (defaults to <true>)
      *  - whether or not errors should be displayed (defaults to <false>)
      * 
-     * @author   Oliver Nassar <onassar@gmail.com>
+     * @author  Oliver Nassar <onassar@gmail.com>
      * @abstract
      */
     abstract class Logging
