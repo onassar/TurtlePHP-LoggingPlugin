@@ -25,8 +25,8 @@
         /**
          * _display
          * 
-         * @var     boolean (default: false)
          * @access  protected
+         * @var     bool (default: false)
          * @static
          */
         protected static $_display = false;
@@ -34,8 +34,8 @@
         /**
          * _length
          * 
-         * @var     integer (default: 0)
          * @access  protected
+         * @var     int (default: 0)
          * @static
          */
         protected static $_length = 0;
@@ -43,8 +43,8 @@
         /**
          * _level
          * 
-         * @var     integer
          * @access  protected
+         * @var     int
          * @static
          */
         protected static $_level;
@@ -52,8 +52,8 @@
         /**
          * _log
          * 
-         * @var     boolean (default: true)
          * @access  protected
+         * @var     bool (default: true)
          * @static
          */
         protected static $_log = true;
@@ -61,8 +61,8 @@
         /**
          * _path
          * 
-         * @var     string
          * @access  protected
+         * @var     string
          * @static
          */
         protected static $_path;
@@ -145,7 +145,7 @@
          * 
          * @access  public
          * @static
-         * @param   integer $length
+         * @param   int $length
          * @return  void
          */
         public static function setLength($length)
@@ -160,7 +160,7 @@
          * 
          * @access  public
          * @static
-         * @param   integer $level
+         * @param   int $level
          * @return  void
          */
         public static function setLevel($level)
