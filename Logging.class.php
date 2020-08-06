@@ -6,213 +6,122 @@
     /**
      * Logging
      * 
-     * TurtlePHP Logging Plugin which allows for the modification of PHP's
-     * default error logging.
+     * Logging plugin for TurtlePHP.
      * 
      * This plugin does not modify how to issue an error log directive; rather
      * it allows for the following customization:
-     *  - error log path (defaults to <.>)
-     *  - error reporting sensitivity (defaults to <E_ALL | E_STRICT>)
-     *  - error log filesize limitation (defaults to 0)
-     *  - whether or not errors should be logged (defaults to <true>)
-     *  - whether or not errors should be displayed (defaults to <false>)
+     *  - error log path
+     *  - error reporting sensitivity
+     *  - error log filesize limitation
+     *  - whether or not errors should be logged
+     *  - whether or not errors should be displayed
      * 
      * @author  Oliver Nassar <onassar@gmail.com>
      * @abstract
+     * @extends Base
      */
-    abstract class Logging
+    abstract class Logging extends Base
     {
         /**
-         * _display
-         * 
+         * _configPath
+         *
+         * @access  protected
+         * @var     string (default: 'config.default.inc.php')
+         * @static
+         */
+        protected static $_configPath = 'config.default.inc.php';
+
+        /**
+         * _initiated
+         *
          * @access  protected
          * @var     bool (default: false)
          * @static
          */
-        protected static $_display = false;
+        protected static $_initiated = false;
 
         /**
-         * _length
+         * _checkDependencies
          * 
          * @access  protected
-         * @var     int (default: 0)
-         * @static
-         */
-        protected static $_length = 0;
-
-        /**
-         * _level
-         * 
-         * @access  protected
-         * @var     int
-         * @static
-         */
-        protected static $_level;
-
-        /**
-         * _log
-         * 
-         * @access  protected
-         * @var     bool (default: true)
-         * @static
-         */
-        protected static $_log = true;
-
-        /**
-         * _path
-         * 
-         * @access  protected
-         * @var     string
-         * @static
-         */
-        protected static $_path;
-
-        /**
-         * displayErrors
-         * 
-         * Toggles on the display of errors to the client.
-         * 
-         * @access  public
          * @static
          * @return  void
          */
-        public static function displayErrors()
+        protected static function _checkDependencies(): void
         {
-            self::$_display = true;
+            static::_checkConfigPluginDependency();
         }
 
         /**
-         * hideErrors
+         * _checkLogPathDirectoryWritePermissions
          * 
-         * Toggles off the display of errors to the client.
-         * 
-         * @access  public
+         * @note    This check needs to come after the parent::init call since
+         *          it requires access to the plugin config data (which isn't
+         *          available at the time of the static::_checkDependencies
+         *          call).
+         * @access  protected
          * @static
          * @return  void
          */
-        public static function hideErrors()
+        protected static function _checkLogPathDirectoryWritePermissions(): void
         {
-            self::$_display = false;
+            $directoryPath = static::_getLogPathDirectory();
+            static::_checkDirectoryWritePermissions($directoryPath);
+        }
+
+        /**
+         * _getLogPathDirectory
+         * 
+         * @access  protected
+         * @static
+         * @return  string
+         */
+        protected static function _getLogPathDirectory(): string
+        {
+            $configData = static::_getConfigData();
+            $logPath = $configData['logPath'];
+            $directoryPath = pathinfo($logPath, PATHINFO_DIRNAME);
+            return $directoryPath;
+        }
+
+        /**
+         * _setINISettings
+         * 
+         * @access  protected
+         * @static
+         * @return  void
+         */
+        protected static function _setINISettings(): void
+        {
+            $configData = static::_getConfigData();
+            ini_set('error_log', $configData['logPath']);
+            ini_set('error_reporting', $configData['level']);
+            ini_set('log_errors_max_len', $configData['length']);
+            ini_set('log_errors', $configData['log']);
+            ini_set('display_errors', $configData['display']);
         }
 
         /**
          * init
          * 
-         * Initializes some error logging settings for ini setting.
-         * 
          * @access  public
          * @static
-         * @return  void
+         * @return  bool
          */
-        public static function init()
+        public static function init(): bool
         {
-            self::$_path = APP . '/tmp/php.log';
-            self::$_level = E_ALL | E_STRICT;
-        }
-
-        /**
-         * setActive
-         * 
-         * Toggles on error logging (both to a file and to the client).
-         * 
-         * @access  public
-         * @static
-         * @return  void
-         */
-        public static function setActive()
-        {
-            self::$_log = true;
-        }
-
-        /**
-         * setInactive
-         * 
-         * Toggles off error logging (both to a file and to the client).
-         * 
-         * @access  public
-         * @static
-         * @return  void
-         */
-        public static function setInactive()
-        {
-            self::$_log = false;
-        }
-
-        /**
-         * setLength
-         * 
-         * Sets the number of bytes that should be collected in an error log.
-         * 
-         * @access  public
-         * @static
-         * @param   int $length
-         * @return  void
-         */
-        public static function setLength($length)
-        {
-            self::$_length = $length;
-        }
-
-        /**
-         * setLevel
-         * 
-         * Sets the level for logging (eg. which types of errors are logged).
-         * 
-         * @access  public
-         * @static
-         * @param   int $level
-         * @return  void
-         */
-        public static function setLevel($level)
-        {
-            self::$_level = $level;
-        }
-
-        /**
-         * setPath
-         * 
-         * Sets the path for error log writing.
-         * 
-         * @access  public
-         * @static
-         * @param   string $path
-         * @return  void
-         */
-        public static function setPath($path)
-        {
-            self::$_path = $path;
-        }
-
-        /**
-         * start
-         * 
-         * Ensures that the log path is writable, and sets the ini settings
-         * accordingly.
-         * 
-         * @access  public
-         * @static
-         * @return  void
-         */
-        public static function start()
-        {
-            // if logs ought to be written to a file
-            if (self::$_log === true) {
-
-                // directory permissions check
-                $directory = pathinfo(self::$_path, PATHINFO_DIRNAME);
-                if (posix_access($directory, POSIX_W_OK) === false) {
-                    throw new \Exception(
-                        '*' . ($directory) . '* needs to be writable.'
-                    );
-                }
+            if (static::$_initiated === true) {
+                return false;
             }
-
-            // ini settings
-            ini_set('error_log', self::$_path);
-            ini_set('error_reporting', self::$_level);
-            ini_set('log_errors_max_len', self::$_length);
-            ini_set('log_errors', self::$_log);
-            ini_set('display_errors', self::$_display);
+            parent::init();
+            static::_checkLogPathDirectoryWritePermissions();
+            static::_setINISettings();
+            return true;
         }
     }
 
+    // Config path loading
+    $info = pathinfo(__DIR__);
+    $parent = ($info['dirname']) . '/' . ($info['basename']);
+    $configPath = ($parent) . '/config.inc.php';
+    \Plugin\Logging::setConfigPath($configPath);
