@@ -21,6 +21,15 @@ Feel free to make use of the TurtlePHP
 [Config](https://github.com/onassar/TurtlePHP-ConfigPlugin) plugins are a more
 robust error logging flow.
 
+### Sample plugin loading:
+``` php
+require_once APP . '/plugins/TurtlePHP-BasePlugin/Base.class.php';
+require_once APP . '/plugins/TurtlePHP-LoggingPlugin/Logging.class.php';
+$path = APP . '/config/plugins/logging.inc.php';
+Plugin\Logging::setLoggingPath($path);
+Plugin\Logging::init();
+```
+
 ### Example Initialization and Startup
 ``` php
 <?php
