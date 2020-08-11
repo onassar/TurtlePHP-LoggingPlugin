@@ -26,8 +26,8 @@ robust error logging flow.
 require_once APP . '/plugins/TurtlePHP-BasePlugin/Base.class.php';
 require_once APP . '/plugins/TurtlePHP-LoggingPlugin/Logging.class.php';
 $path = APP . '/config/plugins/logging.inc.php';
-Plugin\Logging::setLoggingPath($path);
-Plugin\Logging::init();
+TurtlePHP\Plugin\Logging::setLoggingPath($path);
+TurtlePHP\Plugin\Logging::init();
 ```
 
 ### Example Initialization and Startup
@@ -38,7 +38,7 @@ Plugin\Logging::init();
      * Logging
      */
     require_once APP . '/plugins/Logging.class.php';
-    \Plugin\Logging::init();
-    \Plugin\Logging::start();
+    \TurtlePHP\Plugin\Logging::init();
+    \TurtlePHP\Plugin\Logging::start();
 
 ```
