@@ -32,13 +32,8 @@ TurtlePHP\Plugin\Logging::init();
 
 ### Example Initialization and Startup
 ``` php
-<?php
-
-    /**
-     * Logging
-     */
-    require_once APP . '/plugins/Logging.class.php';
-    \TurtlePHP\Plugin\Logging::init();
-    \TurtlePHP\Plugin\Logging::start();
+require_once APP . '/plugins/Logging.class.php';
+\TurtlePHP\Plugin\Logging::init();
+\TurtlePHP\Plugin\Logging::start();
 
 ```
